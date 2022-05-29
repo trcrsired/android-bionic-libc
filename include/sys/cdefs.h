@@ -381,6 +381,10 @@ int __size_mul_overflow(__SIZE_TYPE__ a, __SIZE_TYPE__ b, __SIZE_TYPE__ *result)
  */
 #define __unsafe_check_mul_overflow(x, y) ((__SIZE_TYPE__)-1 / (x) < (y))
 
+#if defined(__GNUC__) && !defined(_Nullable)
+#define _Nullable
+#endif
+
 #include <android/versioning.h>
 #include <android/api-level.h>
 #if __has_include(<android/ndk-version.h>)
