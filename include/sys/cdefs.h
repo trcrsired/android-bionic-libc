@@ -257,7 +257,7 @@
 
 #if defined(_FORTIFY_SOURCE) && _FORTIFY_SOURCE > 0
 /* FORTIFY can interfere with pattern-matching of clang-tidy/the static analyzer.  */
-#  if !defined(__clang_analyzer__)
+#  if !defined(__clang_analyzer__) && defined(__clang__)
 #    define __BIONIC_FORTIFY 1
 /* ASAN has interceptors that FORTIFY's _chk functions can break.  */
 #    if __has_feature(address_sanitizer)
