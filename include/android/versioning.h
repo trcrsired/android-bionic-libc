@@ -49,12 +49,16 @@
 // allows libc++ to refer to these functions in inlines without needing to guard them, needed since
 // libc++ doesn't currently guard these calls. There's no risk to the apps though because using
 // those APIs will still cause a link error.
-#if defined(__ANDROID_UNAVAILABLE_SYMBOLS_ARE_WEAK__)
+#if defined(__ANDROID_UNAVAILABLE_SYMBOLS_ARE_WEAK__) && defined(__clang__)
 #define __BIONIC_AVAILABILITY(__what) __attribute__((__availability__(android,__what)))
 #define __INTRODUCED_IN_NO_GUARD_FOR_NDK(api_level) __INTRODUCED_IN(api_level)
 #define __INTRODUCED_IN_X86_NO_GUARD_FOR_NDK(api_level) __INTRODUCED_IN_X86(api_level)
 #else
+#if defined(__clang__)
 #define __BIONIC_AVAILABILITY(__what) __attribute__((__availability__(android,strict,__what)))
+#else
+#define __BIONIC_AVAILABILITY(__what)
+#endif
 #define __INTRODUCED_IN_NO_GUARD_FOR_NDK(api_level)
 #define __INTRODUCED_IN_X86_NO_GUARD_FOR_NDK(api_level)
 #endif
