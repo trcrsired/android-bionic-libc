@@ -144,6 +144,9 @@
 #define __enable_if(cond, msg)
 #define __clang_error_if(cond, msg)
 #define __clang_warning_if(cond, msg)
+#ifndef BIONIC_IOCTL_NO_SIGNEDNESS_OVERLOAD
+#define BIONIC_IOCTL_NO_SIGNEDNESS_OVERLOAD
+#endif
 #endif
 
 
